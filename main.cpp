@@ -2,22 +2,30 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
 
-float red,green,blue,light;
-float sizeTeapot;
 void initFunc();
 void funReshape(int w, int h);
 void funDisplay();
+void drawTriangulo();
+void drawPuntos();
+void funKeyboard(unsigned char key, int x, int y);
+void funIdle();
 
 using namespace std;
+
+// Variables globales
+int w = 500;
+int h = 500;
+GLfloat colorPuntos[] = { 1.0f, 1.0f, 1.0f };
+bool dibujar = true;
 
 int main(int argc, char** argv) {
 
  // Inicializamos GLUT
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(500,500);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(w,h);
     glutInitWindowPosition(50,50);
-    glutCreateWindow("Sesion 1");
+    glutCreateWindow("Sesion 2");
     
  // Inicializamos GLEW
     GLenum err = glewInit();
@@ -32,13 +40,8 @@ int main(int argc, char** argv) {
  // Configuración CallBacks
     glutReshapeFunc(funReshape);
     glutDisplayFunc(funDisplay);
-    
-    
-    
-    //Define la vista: DEFAULT
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0);
+    glutKeyboardFunc(funKeyboard);
+    glutIdleFunc(funIdle);
     
  // Bucle principal
     glutMainLoop();
@@ -47,35 +50,107 @@ int main(int argc, char** argv) {
 }
 
 void initFunc() {
+
+ // Estado inicial
+    glPointSize(10);
+    
+ // Test de profundidad
+    glEnable(GL_DEPTH_TEST);
+    
+ // Modelo de sombreado
+    glShadeModel(GL_FLAT);
+    //glShadeModel(GL_SMOOTH);
     
 }
 
-void funReshape(int w, int h) {
-      
-    printf("Dimensiones %dx%d pixeles\n", w, h);
-    red=w/1000.0f;
-    green=h/1000.0f;
-    blue=w/500.0f-h/500.0f;
-    sizeTeapot=w/2000.0f+h/2000.0f;
-   //glScalef(w/500.0, h/500.0, 1.0f);
+void funReshape(int wnew, int hnew) {
+    
+ // Configuración del Viewport
+    glViewport(0, 0, wnew, hnew);
+
+ // Captura de w y h
+    w = wnew;
+    h = hnew;
+    
 }
 
 void funDisplay() {
     
-    
  // Borramos el buffer de color
-    glClearColor( 
-  1.0,1.0,1.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-   
-     //SE APLICA COLOR A LO QUE SE VAYA A DIBUJAR
-    glColor3f(red,green,blue); 
+ // Para configurar la matriz matriz P
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
     
- // Dibujamos una tetera con modelo de alambre
-    glutWireTeapot(sizeTeapot);
+ // Matriz de Proyección P (Cámara)
+    GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
+    GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
+    gluPerspective(fovy,aspectRatio,nplane,fplane);
+
+ // Dibujamos un triángulo
+    drawTriangulo();
+    
+ // Dibujamos dos puntos
+    drawPuntos();
 
  // Intercambiamos los buffers
     glutSwapBuffers();
+    
+}
+
+void drawTriangulo() {
+    
+    glBegin(GL_TRIANGLES);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, -2.0f);
+
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex3f( 0.5, -0.5, -2.0f);
+
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex3f( 0.0f,  0.5f, -2.0f);
+    glEnd();
+
+}
+
+void drawPuntos() {
+
+    glColor3fv(colorPuntos);
+    glBegin(GL_POINTS);
+        glVertex3f( 0.0f, 0.0f, -3.0f);
+        glVertex3f( 0.5f, 0.5f, -3.0f);
+    glEnd();
+
+}
+
+void funKeyboard(unsigned char key, int x, int y) {
+   
+    switch(key) {
+        case 'r': colorPuntos[0] = 1.0f; colorPuntos[1] = 0.0f; colorPuntos[2] = 0.0f; break;
+        case 'g': colorPuntos[0] = 0.0f; colorPuntos[1] = 1.0f; colorPuntos[2] = 0.0f; break;
+        case 'b': colorPuntos[0] = 0.0f; colorPuntos[1] = 0.0f; colorPuntos[2] = 1.0f; break;
+        default:  colorPuntos[0] = 1.0f; colorPuntos[1] = 1.0f; colorPuntos[2] = 1.0f; break;
+    }
+    
+    glutPostRedisplay();
+        
+}
+
+void funIdle() {
+    
+    if(dibujar) {
+        glPointSize(10);
+        dibujar = false;
+    }
+    else {
+        glPointSize(50);
+        dibujar = true;  
+    }
+    
+    Sleep(500);
+    
+    glutPostRedisplay();
     
 }
