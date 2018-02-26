@@ -36,7 +36,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/sesion1.o
+	${OBJECTDIR}/sesion1.o \
+	${OBJECTDIR}/sesion2.o \
+	${OBJECTDIR}/sesion3.o
 
 
 # C Compiler Flags
@@ -72,6 +74,16 @@ ${OBJECTDIR}/sesion1.o: sesion1.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion1.o sesion1.cpp
+
+${OBJECTDIR}/sesion2.o: sesion2.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion2.o sesion2.cpp
+
+${OBJECTDIR}/sesion3.o: sesion3.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion3.o sesion3.cpp
 
 # Subprojects
 .build-subprojects:
