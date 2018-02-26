@@ -6,18 +6,15 @@ void initFunc();
 void funReshape(int w, int h);
 void funDisplay();
 void drawTriangulo(char color);
-void drawMastil();
 void funKeyboard(int key, int x, int y);
-void funIdle();
 
 using namespace std;
 
 // Variables globales
 int w = 500;
 int h = 500;
-GLfloat desZ = -4.0f;
+GLfloat desZ = -5.0f;
 GLfloat rotY =  0.0f;
-GLfloat rotZ =120.0f;
 
 int main(int argc, char** argv) {
 
@@ -26,7 +23,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(w,h);
     glutInitWindowPosition(50,50);
-    glutCreateWindow("Sesion 3");
+    glutCreateWindow("Sesion 4");
     
  // Inicializamos GLEW
     GLenum err = glewInit();
@@ -42,7 +39,6 @@ int main(int argc, char** argv) {
     glutReshapeFunc(funReshape);
     glutDisplayFunc(funDisplay);
     glutSpecialFunc(funKeyboard);
-    glutIdleFunc(funIdle);
     
  // Bucle principal
     glutMainLoop();
@@ -54,10 +50,20 @@ void initFunc() {
    
  // Test de profundidad
     glEnable(GL_DEPTH_TEST);
-    
+    glPolygonOffset(1.0,1.0);
  // Modelo de sombreado
     glShadeModel(GL_FLAT);
-    
+       
+ // Modo de rasterizado de las caras
+    glPolygonMode(GL_FRONT,GL_FILL);
+    glPolygonMode(GL_BACK,GL_LINE); 
+     glEnable(GL_FOG);    
+    glFogi(GL_FOG_MODE,GL_LINEAR);
+    glFogf(GL_FOG_START, 10.0);
+   glFogf(GL_FOG_END  , 20.0);
+   GLfloat colorNiebla[4] = {0.0, 0.0, 0.0, 1.0};
+    glFogfv(GL_FOG_COLOR, colorNiebla);
+
 }
 
 void funReshape(int wnew, int hnew) {
@@ -82,8 +88,7 @@ void funDisplay() {
     glLoadIdentity();
     
  // Matriz de Proyección P (Cámara)
-    GLfloat aspectRatio = (GLfloat)w/(GLfloat)h;    
-    GLfloat fovy = 50.0f, nplane = 0.1f, fplane = 20.0f;
+    GLfloat fovy = 50.0f, aspectRatio = (GLfloat)w/(GLfloat)h, nplane = 1.0f, fplane = 20.0f;
     gluPerspective(fovy,aspectRatio,nplane,fplane);
     
  // Para configurar las matrices M y V
@@ -91,40 +96,27 @@ void funDisplay() {
     glLoadIdentity();
     
  // Matriz de Vista V (Cámara)
-    // Aquí cargaremos la matriz V
-    
- // Dibujamos un triángulo
-   
-       
+    GLfloat eye[3]    = {0.0,  2.0,  0.0};
+    GLfloat center[3] = {0.0,  0.0, -5.0};
+    GLfloat up[3]     = {0.0,  1.0,  0.0};
+    gluLookAt(    eye[0],    eye[1],    eye[2],
+               center[0], center[1], center[2],
+                   up[0],     up[1],     up[2]);
 
-    glTranslatef( 0.0f, 0.0f, desZ);
-  
-    
-    glRotatef(rotY,0.0f,1.0f,0.0f);
-   
-    drawMastil();
-   
-   
-    glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
+ // Dibujamos los objetos (M)
+    glTranslatef(0.0f, 0.0f, desZ);
+    glRotatef(rotY, 0.0f, 1.0f, 0.0f);
+    glColor3f(1.0, 1.0, 1.0);
+    glutWireCube(2.0);
+    glPushMatrix();
+        glScalef(3.0f,3.0f,1.0f);
+        glEnable(GL_POLYGON_OFFSET_FILL);
+           drawTriangulo('r');
+        glDisable(GL_POLYGON_OFFSET_FILL);
+    glPopMatrix();
+    glScalef(2.0f,2.0f,1.0f);
     drawTriangulo('g');
     
-     
-  
-   
-   
-    glRotatef(120.0, 0.0f, 0.0f, 1.0f);
-    drawTriangulo('b');
-   
-     
-   
-    
- // Dibujamos otro triángulo
-   
-    glRotatef(120.0, 0.0f, 0.0f, 1.0f);
-    drawTriangulo('r');
-    
-    
-     
  // Intercambiamos los buffers
     glutSwapBuffers();
     
@@ -147,19 +139,9 @@ void drawTriangulo(char color) {
     }
     
     glBegin(GL_TRIANGLES);
-        glVertex3f(0.0f, 0.0f, -4.0f);
-        glVertex3f( 0.1f, -0.5f,-4.0f);
-        glVertex3f(-0.1f,-0.5f,-4.0f);
-    glEnd();
-    
-}
-void drawMastil(){
-    glColor3f(1.0f,1.0f,1.0f);
-    glLineWidth(7);
-    glBegin(GL_LINES);
-    glVertex3f(0.0,0.0,-3.99);
-    glVertex3f(0.0,-1.5,-3.99);
-    
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glVertex3f( 0.5f, -0.5f, 0.0f);
+        glVertex3f( 0.0f,  0.5f, 0.0f);
     glEnd();
     
 }
@@ -186,12 +168,4 @@ void funKeyboard(int key, int x, int y) {
     
     glutPostRedisplay();
       
-}
-void funIdle() {
-   
-    rotZ+=2.0;
-    
-    Sleep(10);
-    
-    glutPostRedisplay();
 }
