@@ -1,3 +1,4 @@
+/*
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <stdio.h>
@@ -7,9 +8,7 @@ void funReshape(int w, int h);
 void funDisplay();
 void drawTriangulo(char color);
 void funKeyboard(int key, int x, int y);
-void antebrazo();
-void brazo();
-void mano();
+
 using namespace std;
 
 // Variables globales
@@ -103,58 +102,24 @@ void funDisplay() {
     GLfloat up[3]     = {0.0,  1.0,  0.0};
     gluLookAt(    eye[0],    eye[1],    eye[2],
                center[0], center[1], center[2],
-                   up[0],     up[1],     up[2]); 
+                   up[0],     up[1],     up[2]);
 
  // Dibujamos los objetos (M)
     glTranslatef(0.0f, 0.0f, desZ);
     glRotatef(rotY, 0.0f, 1.0f, 0.0f);
-   
-    antebrazo();
-    brazo();
-    mano();
-    
-    
-   
+    glColor3f(1.0, 1.0, 1.0);
+    glutWireCube(2.0);
+    glPushMatrix();
+        glScalef(3.0f,3.0f,1.0f);
+        glEnable(GL_POLYGON_OFFSET_FILL);
+           drawTriangulo('r');
+        glDisable(GL_POLYGON_OFFSET_FILL);
+    glPopMatrix();
+    glScalef(2.0f,2.0f,1.0f);
+    drawTriangulo('g');
     
  // Intercambiamos los buffers
     glutSwapBuffers();
-    
-}
-void antebrazo(){
-    glPushMatrix();
-    glRotatef(90, 0.0f, 1.0f, 0.0f);
-     glColor3f(1.0, 1.0, 1.0);
-    glutWireCylinder(0.3,2,30,10);
-    glEnable(GL_POLYGON_OFFSET_FILL);
-         glColor3f(1.0, 0.0, 0.0);
-         glutSolidCylinder(0.3,2,30,10);
-      glDisable(GL_POLYGON_OFFSET_FILL);
-      glPopMatrix();
-}
-void brazo(){
-    glPushMatrix();
-     glColor3f(1.0, 1.0, 1.0);
-    glutWireCylinder(0.3,1.5,30,15);
-    glEnable(GL_POLYGON_OFFSET_FILL);
-         glColor3f(1.0, 1.0, 0.0);
-         glutSolidCylinder(0.3,1.5,30,15);
-      glDisable(GL_POLYGON_OFFSET_FILL);
-      glPopMatrix();
-    
-}
-void mano(){
-    glPushMatrix();
-    glTranslatef(0.0,0.0,1.5);
-    glRotatef(45,1.0,0.0,0.0);
-           
-     glColor3f(1.0, 1.0, 1.0);
-    glutWireCylinder(0.3,0.5,30,15);
-    glEnable(GL_POLYGON_OFFSET_FILL);
-         glColor3f(0.0, 0.0, 1.0);
-         glutSolidCylinder(0.3,0.5,30,15);
-      glDisable(GL_POLYGON_OFFSET_FILL);
-    
-    glPopMatrix();
     
 }
 
@@ -205,3 +170,5 @@ void funKeyboard(int key, int x, int y) {
     glutPostRedisplay();
       
 }
+ */
+
