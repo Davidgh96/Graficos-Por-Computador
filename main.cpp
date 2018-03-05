@@ -70,7 +70,15 @@ void initFunc() {
  // Modelo de sombreado
     glShadeModel(GL_FLAT);
        
-
+ // Modo de rasterizado de las caras
+//    glPolygonMode(GL_FRONT,GL_FILL);
+//    glPolygonMode(GL_BACK,GL_LINE); 
+//     glEnable(GL_FOG);    
+//    glFogi(GL_FOG_MODE,GL_LINEAR);
+//    glFogf(GL_FOG_START, 10.0);
+//   glFogf(GL_FOG_END  , 20.0);
+//   GLfloat colorNiebla[4] = {0.0, 0.0, 0.0, 1.0};
+//    glFogfv(GL_FOG_COLOR, colorNiebla);
  
 
 }
