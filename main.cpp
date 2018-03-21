@@ -5,10 +5,8 @@
 void initFunc();
 void funReshape(int w, int h);
 void funDisplay();
-void drawTriangulo(char color);
+void drawCube();
 void funKeyboard(int key, int x, int y);
-void drawEjes();
-void  drawEsfera();
 
 using namespace std;
 
@@ -25,7 +23,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(w,h);
     glutInitWindowPosition(50,50);
-    glutCreateWindow("Sesion 4");
+    glutCreateWindow("Sesion 5");
     
  // Inicializamos GLEW
     GLenum err = glewInit();
@@ -52,19 +50,6 @@ void initFunc() {
    
  // Test de profundidad
     glEnable(GL_DEPTH_TEST);
-    glPolygonOffset(1.0,1.0);
- // Modelo de sombreado
-    glShadeModel(GL_FLAT);
-       
- // Modo de rasterizado de las caras
-    glPolygonMode(GL_FRONT,GL_FILL);
-    glPolygonMode(GL_BACK,GL_LINE); 
-     glEnable(GL_FOG);    
-    glFogi(GL_FOG_MODE,GL_LINEAR);
-    glFogf(GL_FOG_START, 10.0);
-   glFogf(GL_FOG_END  , 20.0);
-   GLfloat colorNiebla[4] = {0.0, 0.0, 0.0, 1.0};
-    glFogfv(GL_FOG_COLOR, colorNiebla);
 
 }
 
@@ -98,7 +83,7 @@ void funDisplay() {
     glLoadIdentity();
     
  // Matriz de Vista V (Cámara)
-    GLfloat eye[3]    = {5.0,  2.0,  5.0};
+    GLfloat eye[3]    = {0.0,  2.0,  0.0};
     GLfloat center[3] = {0.0,  0.0, -5.0};
     GLfloat up[3]     = {0.0,  1.0,  0.0};
     gluLookAt(    eye[0],    eye[1],    eye[2],
@@ -106,86 +91,58 @@ void funDisplay() {
                    up[0],     up[1],     up[2]);
 
  // Dibujamos los objetos (M)
-    
     glTranslatef(0.0f, 0.0f, desZ);
-   glRotatef(rotY, 0.0f, 1.0f, 0.0f);
-//    glColor3f(1.0, 1.0, 1.0);
-//    glutWireCube(2.0);
-//    glPushMatrix();
-//        glScalef(3.0f,3.0f,1.0f);
-//        glEnable(GL_POLYGON_OFFSET_FILL);
-//           drawTriangulo('r');
-//        glDisable(GL_POLYGON_OFFSET_FILL);
-//    glPopMatrix();
-//    glScalef(2.0f,2.0f,1.0f);
-//    drawTriangulo('g');
-    drawEjes();
-    drawEsfera();
+    glRotatef(rotY, 0.0f, 1.0f, 0.0f);
+    drawCube();
     
  // Intercambiamos los buffers
     glutSwapBuffers();
     
 }
-void  drawEsfera(){
-    glRotatef(90, 1.0f, 0.0f, 0.0f);
-    glColor3f(1.0, 1.0, 0.0);
-    glutWireSphere(0.5,20,10); 
-     glEnable(GL_POLYGON_OFFSET_FILL);
-    glColor3f(0.5, 0.5, 0.5);
-   glutSolidSphere(0.5,20,10);
-   glDisable(GL_POLYGON_OFFSET_FILL);
-}
-void drawEjes(){
-    glPushMatrix(); 
-  
+
+void drawCube() {
     
-       
-        glLineWidth(2);
+ // Definimos el material del cubo
+    GLfloat Ka[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    GLfloat Kd[] = { 0.8f, 0.8f, 0.0f, 1.0f };
+    GLfloat Ks[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+    glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+    glMaterialf (GL_FRONT, GL_SHININESS, 100.0f);
         
-       
-    glBegin(GL_LINES);
-    
-    glColor3f(1.0,0.0,0.0);
-    glVertex3i(0,0,-20);
-    glVertex3i(0,0,20);
-    
-    glTranslatef(0.0f, 0.0f, desZ);
-   glRotatef(rotY, 0.0f, 1.0f, 0.0f);
-    glColor3f(0.0,0.0,1.0);
-    glVertex3i(-2,0,0);
-    glVertex3i(2,0,0);
-    
-    glColor3f(0.0,1.0,0.0);
-    glVertex3i(0,-2,0);
-    glVertex3i(0,2,0);
-    
-    
-     
-    glEnd();
-    glLineWidth(1);
-   
-    glPopMatrix();
-}
-void drawTriangulo(char color) {
-    
-    switch(color) {
-        case 'r':
-            glColor3f(1.0f, 0.0f, 0.0f);
-            break;
-        case 'g':
-            glColor3f(0.0f, 1.0f, 0.0f);
-            break;
-        case 'b':
-            glColor3f(0.0f, 0.0f, 1.0f);
-            break;
-        default:
-            glColor3f(1.0f, 1.0f, 1.0f);            
-    }
-    
-    glBegin(GL_TRIANGLES);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glVertex3f( 0.5f, -0.5f, 0.0f);
-        glVertex3f( 0.0f,  0.5f, 0.0f);
+ // Definimos el cubo
+    glBegin(GL_QUADS);
+     // CARA DERECHA (x = 1)
+        glVertex3f( 1.0f, -1.0f,  1.0f); 
+        glVertex3f( 1.0f, -1.0f, -1.0f);   
+        glVertex3f( 1.0f,  1.0f, -1.0f);    
+        glVertex3f( 1.0f,  1.0f,  1.0f);   
+     // CARA IZQUIERDA (x = -1)
+        glVertex3f(-1.0f, -1.0f,  1.0f);
+        glVertex3f(-1.0f,  1.0f,  1.0f);
+        glVertex3f(-1.0f,  1.0f, -1.0f);
+        glVertex3f(-1.0f, -1.0f, -1.0f);
+     // CARA SUPERIOR (y = 1)
+        glVertex3f( 1.0f,  1.0f,  1.0f);
+        glVertex3f( 1.0f,  1.0f, -1.0f);
+        glVertex3f(-1.0f,  1.0f, -1.0f); 
+        glVertex3f(-1.0f,  1.0f,  1.0f);
+     // CARA INFERIOR (y = -1)
+        glVertex3f( 1.0f, -1.0f,  1.0f);    
+        glVertex3f(-1.0f, -1.0f,  1.0f);
+        glVertex3f(-1.0f, -1.0f, -1.0f);    
+        glVertex3f( 1.0f, -1.0f, -1.0f);
+     // CARA DELANTERA (z = 1)
+        glVertex3f(-1.0f, -1.0f,  1.0f);
+        glVertex3f( 1.0f, -1.0f,  1.0f);
+        glVertex3f( 1.0f,  1.0f,  1.0f);
+        glVertex3f(-1.0f,  1.0f,  1.0f);
+     // CARA TRASERA (z = -1)
+        glVertex3f(-1.0f, -1.0f, -1.0f);
+        glVertex3f(-1.0f,  1.0f, -1.0f);
+        glVertex3f( 1.0f,  1.0f, -1.0f);  
+        glVertex3f( 1.0f, -1.0f, -1.0f);
     glEnd();
     
 }
