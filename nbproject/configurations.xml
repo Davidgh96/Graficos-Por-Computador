@@ -18,6 +18,7 @@
       <itemPath>sesion2.cpp</itemPath>
       <itemPath>sesion3.cpp</itemPath>
       <itemPath>sesion4.cpp</itemPath>
+      <itemPath>sesion5.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -64,6 +65,8 @@
       </item>
       <item path="sesion4.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="sesion5.cpp" ex="false" tool="1" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -96,6 +99,8 @@
       <item path="sesion3.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="sesion4.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sesion5.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

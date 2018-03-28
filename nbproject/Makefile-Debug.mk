@@ -40,7 +40,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/sesion1.o \
 	${OBJECTDIR}/sesion2.o \
 	${OBJECTDIR}/sesion3.o \
-	${OBJECTDIR}/sesion4.o
+	${OBJECTDIR}/sesion4.o \
+	${OBJECTDIR}/sesion5.o
 
 
 # C Compiler Flags
@@ -96,6 +97,11 @@ ${OBJECTDIR}/sesion4.o: sesion4.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion4.o sesion4.cpp
+
+${OBJECTDIR}/sesion5.o: sesion5.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion5.o sesion5.cpp
 
 # Subprojects
 .build-subprojects:

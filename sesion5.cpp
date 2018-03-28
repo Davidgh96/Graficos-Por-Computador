@@ -1,3 +1,4 @@
+/*
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <stdio.h>
@@ -261,3 +262,5 @@ void funKeyboardSpecial(int key, int x, int y) {
     glutPostRedisplay();
       
 }
+ */
+
