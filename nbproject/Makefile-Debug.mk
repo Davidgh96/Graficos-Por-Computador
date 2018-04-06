@@ -41,7 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/sesion2.o \
 	${OBJECTDIR}/sesion3.o \
 	${OBJECTDIR}/sesion4.o \
-	${OBJECTDIR}/sesion5.o
+	${OBJECTDIR}/sesion5.o \
+	${OBJECTDIR}/sesion6.o
 
 
 # C Compiler Flags
@@ -58,7 +59,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/lib
+LDLIBSOPTIONS=-L/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/lib -L/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/lib
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -66,42 +67,47 @@ LDLIBSOPTIONS=-L/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sesion.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sesion ${OBJECTFILES} ${LDLIBSOPTIONS} -lopengl32 -lglu32 -lglew32 -lfreeglut
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sesion ${OBJECTFILES} ${LDLIBSOPTIONS} -lSOIL -lopengl32 -lglu32 -lglew32 -lfreeglut
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/prueba2.o: prueba2.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/prueba2.o prueba2.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/prueba2.o prueba2.cpp
 
 ${OBJECTDIR}/sesion1.o: sesion1.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion1.o sesion1.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion1.o sesion1.cpp
 
 ${OBJECTDIR}/sesion2.o: sesion2.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion2.o sesion2.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion2.o sesion2.cpp
 
 ${OBJECTDIR}/sesion3.o: sesion3.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion3.o sesion3.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion3.o sesion3.cpp
 
 ${OBJECTDIR}/sesion4.o: sesion4.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion4.o sesion4.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion4.o sesion4.cpp
 
 ${OBJECTDIR}/sesion5.o: sesion5.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion5.o sesion5.cpp
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion5.o sesion5.cpp
+
+${OBJECTDIR}/sesion6.o: sesion6.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/ogl/include -I/D/Mis\ documentos/Ingenieria\ Computadores/Cuarto\ Computadores/Segundo\ Cuatrimestre/Graficos\ por\ Computador/libs/soil/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sesion6.o sesion6.cpp
 
 # Subprojects
 .build-subprojects:

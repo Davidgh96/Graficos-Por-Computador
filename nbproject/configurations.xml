@@ -19,6 +19,7 @@
       <itemPath>sesion3.cpp</itemPath>
       <itemPath>sesion4.cpp</itemPath>
       <itemPath>sesion5.cpp</itemPath>
+      <itemPath>sesion6.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -44,13 +45,16 @@
         <ccTool>
           <incDir>
             <pElem>D:/Mis documentos/Ingenieria Computadores/Cuarto Computadores/Segundo Cuatrimestre/Graficos por Computador/libs/ogl/include</pElem>
+            <pElem>D:/Mis documentos/Ingenieria Computadores/Cuarto Computadores/Segundo Cuatrimestre/Graficos por Computador/libs/soil/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sesion</output>
           <linkerAddLib>
             <pElem>D:/Mis documentos/Ingenieria Computadores/Cuarto Computadores/Segundo Cuatrimestre/Graficos por Computador/libs/ogl/lib</pElem>
+            <pElem>D:/Mis documentos/Ingenieria Computadores/Cuarto Computadores/Segundo Cuatrimestre/Graficos por Computador/libs/soil/lib</pElem>
           </linkerAddLib>
-          <commandLine>-lopengl32 -lglu32 -lglew32 -lfreeglut</commandLine>
+          <commandLine>-lSOIL -lopengl32 -lglu32 -lglew32 -lfreeglut</commandLine>
         </linkerTool>
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -66,6 +70,8 @@
       <item path="sesion4.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="sesion5.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sesion6.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -101,6 +107,8 @@
       <item path="sesion4.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="sesion5.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sesion6.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
