@@ -13,6 +13,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.cpp</itemPath>
+      <itemPath>practicaFinal.cpp</itemPath>
       <itemPath>prueba2.cpp</itemPath>
       <itemPath>sesion1.cpp</itemPath>
       <itemPath>sesion2.cpp</itemPath>
@@ -60,6 +61,8 @@
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="practicaFinal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="prueba2.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="sesion1.cpp" ex="false" tool="1" flavor2="0">
@@ -98,6 +101,8 @@
         </asmTool>
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="practicaFinal.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="prueba2.cpp" ex="false" tool="1" flavor2="0">
       </item>

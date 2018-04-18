@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/practicaFinal.o \
 	${OBJECTDIR}/prueba2.o \
 	${OBJECTDIR}/sesion1.o \
 	${OBJECTDIR}/sesion2.o \
@@ -74,6 +75,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/practicaFinal.o: practicaFinal.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/practicaFinal.o practicaFinal.cpp
 
 ${OBJECTDIR}/prueba2.o: prueba2.cpp
 	${MKDIR} -p ${OBJECTDIR}
